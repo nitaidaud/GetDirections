@@ -10,16 +10,17 @@ dotenv.config();
 
 const apiKey = process.env.API_KEY?.toString();
 const restriction = process.env.RESTRICTION?.toString();
+const packageName = process.env.PACKAGE?.toString();
 
 export const CalculateDirections = async (
   start: LatLng,
   destination: LatLng,
 ): Promise<DirectionsResponseData | null> => {
-  if (apiKey && restriction) {
+  if (apiKey && restriction && packageName) {
     const response = await client
       .directions({
         headers: {
-          "X-Android-Package": "com.pickypark.pickypark",
+          "X-Android-Package": packageName,
           "X-Android-Cert": restriction,
         },
         params: {
